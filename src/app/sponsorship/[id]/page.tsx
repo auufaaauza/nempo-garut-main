@@ -63,41 +63,20 @@ const JMLCEventDetailPage: React.FC = () => {
 
   const cardVariants = {
     offscreen: {
-      y: 50,
+      y: 20,
       opacity: 0,
     },
     onscreen: {
       y: 0,
       opacity: 1,
       transition: {
-        bounce: 0.4,
-        duration: 0.8,
-      },
-    },
-    hover: {
-      scale: 1.03,
-      boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
-      transition: {
-        duration: 0.3,
+        duration: 0.6,
       },
     },
   };
 
   const buttonVariants = {
-    hover: { scale: 1.05 },
     tap: { scale: 0.95 },
-  };
-
-  const staggerVariants = {
-    offscreen: {
-      y: 50,
-    },
-    onscreen: {
-      y: 0,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
   };
 
   const faqContentVariants = {
@@ -144,7 +123,7 @@ const JMLCEventDetailPage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-gradient-to-br from-white to-slate-200 text-foreground">
         {/* HERO */}
         <section className="relative py-16 md:py-24">
           <div className="container grid md:grid-cols-2 gap-10 items-center">
@@ -153,9 +132,7 @@ const JMLCEventDetailPage: React.FC = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <p className="text-xs uppercase tracking-[.3em] text-gray-500">
-                Sponsorship Deck
-              </p>
+              
               <h1 className="mt-3 hero-h1 font-extrabold leading-tight">
                 <span className="text-primary">
                   JEOS Mobile Legend Championship
@@ -170,19 +147,17 @@ const JMLCEventDetailPage: React.FC = () => {
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <motion.a
                   variants={buttonVariants}
-                  whileHover="hover"
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-5 py-3 rounded-lg bg-primary text-black font-semibold hover:bg-slate-200 transition"
+                  className="px-5 py-3 rounded-lg bg-primary text-black font-semibold transition hover:opacity-80"
                 >
                   Download Proposal PDF
                 </motion.a>
                 <motion.a
                   variants={buttonVariants}
-                  whileHover="hover"
                   whileTap="tap"
                   href="#packages"
-                  className="px-5 py-3 rounded-lg border border-gray-300 text-gray-800 hover:bg-gray-100 transition"
+                  className="px-5 py-3 rounded-lg border border-gray-300 text-gray-800 transition hover:bg-gray-100"
                 >
                   Lihat Paket Sponsor
                 </motion.a>
@@ -193,49 +168,52 @@ const JMLCEventDetailPage: React.FC = () => {
               </div>
             </motion.div>
             <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white/85 backdrop-blur-md border border-gray-300/60 rounded-2xl p-6"
-            >
-              {/* Hero Banner Slideshow Otomatis */}
-              <div className="relative aspect-video rounded-xl overflow-hidden ring-1 ring-gray-200 mb-4">
-                {highlightImages.map((src, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <img
-                      src={src}
-                      alt={`Dokumentasi JMLC Vol. 1 - Slide ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+  initial={{ x: 100, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="relative h-[480px] rounded-2xl p-6 overflow-hidden"
+>
+  {/* Latar belakang blur untuk mengisi area kosong */}
+  <div className="absolute inset-0 bg-white/50 backdrop-blur-3xl"></div>
 
-              {/* Statistik */}
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
-                  <div className="text-2xl text-primary font-bold">64</div>
-                  <div className="text-[11px] text-gray-500">Tim</div>
-                </div>
-                <div className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
-                  <div className="text-2xl text-primary font-bold">500+</div>
-                  <div className="text-[11px] text-gray-500">
-                    Penonton Offline
-                  </div>
-                </div>
-                <div className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
-                  <div className="text-2xl text-primary font-bold">10K+</div>
-                  <div className="text-[11px] text-gray-500">
-                    Digital Impressions
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+  {/* Hero Banner Slideshow Otomatis */}
+  <div className="relative rounded-xl overflow-hidden ring-1 ring-gray-200 h-full w-full mx-auto">
+    {highlightImages.map((src, index) => (
+      <div
+        key={index}
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+          index === currentSlide ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <img
+          src={src}
+          alt={`Dokumentasi JMLC Vol. 1 - Slide ${index + 1}`}
+          className="w-full h-full object-contain"
+        />
+      </div>
+    ))}
+  </div>
+
+  {/* Statistik */}
+  <div className="grid grid-cols-3 gap-3 text-center absolute bottom-3 left-6 right-6 p-4">
+    <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+        <div className="text-2xl text-blue-900 font-bold">64</div>
+        <div className="text-[11px] text-black">Tim</div>
+    </div>
+    <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+        <div className="text-2xl text-blue-900 font-bold">500+</div>
+        <div className="text-[11px] text-black">
+            Penonton Offline
+        </div>
+    </div>
+    <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+        <div className="text-2xl text-blue-900 font-bold">10K+</div>
+        <div className="text-[11px] text-black">
+            Digital Impressions
+        </div>
+    </div>
+</div>
+</motion.div>
           </div>
         </section>
 
@@ -246,7 +224,6 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="space-y-4"
             >
               <h2 className="section-h2 font-extrabold">Tentang Event</h2>
@@ -259,16 +236,20 @@ const JMLCEventDetailPage: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <motion.div
                   variants={cardVariants}
-                  whileHover="hover"
-                  className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4"
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4"
                 >
                   <div className="text-primary font-semibold">Format</div>
                   <div className="text-gray-600">Offline + Live Streaming</div>
                 </motion.div>
                 <motion.div
                   variants={cardVariants}
-                  whileHover="hover"
-                  className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4"
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4"
                 >
                   <div className="text-primary font-semibold">Durasi</div>
                   <div className="text-gray-600">2 Hari (BO1–BO5)</div>
@@ -279,7 +260,6 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
             >
               <h3 className="text-lg font-extrabold mb-3">Event Goals</h3>
               <ul className="space-y-2 text-gray-600 text-sm">
@@ -317,29 +297,34 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-2 gap-6"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">Lokasi</h4>
                 <p className="text-gray-600">Gedung Serbaguna Garut</p>
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">Tanggal</h4>
                 <p className="text-gray-600">Sabtu–Minggu, 14–15 Juni 2025</p>
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">Format</h4>
                 <p className="text-gray-600">
@@ -349,8 +334,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Rundown Singkat
@@ -374,21 +361,24 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-4 gap-4"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
               >
                 <div className="text-3xl font-bold text-primary">15–30 th</div>
                 <div className="text-xs text-gray-500">Segment usia</div>
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
               >
                 <div className="text-3xl font-bold text-primary">
                   IG · TikTok · YT
@@ -397,8 +387,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
               >
                 <div className="text-3xl font-bold text-primary">
                   Gaming · F&B
@@ -407,8 +399,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5"
               >
                 <div className="text-3xl font-bold text-primary">
                   Slides & Overlay
@@ -429,13 +423,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-2 gap-8"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Tahapan Kompetisi
@@ -450,8 +445,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">Penghargaan</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
@@ -474,13 +471,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-2 gap-6"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Online Campaign
@@ -493,8 +491,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Offline Activation
@@ -519,14 +519,15 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-3 gap-6"
             >
               {/* Diamond */}
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
               >
                 <div className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded inline-block">
                   DIAMOND
@@ -549,8 +550,10 @@ const JMLCEventDetailPage: React.FC = () => {
               {/* Gold */}
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
               >
                 <div className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded inline-block">
                   GOLD
@@ -569,8 +572,10 @@ const JMLCEventDetailPage: React.FC = () => {
               {/* Silver */}
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
               >
                 <div className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded inline-block">
                   SILVER
@@ -591,13 +596,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-2 gap-6 mt-6"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
               >
                 <div className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded inline-block">
                   SUPPORTING / IN-KIND
@@ -613,8 +619,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6"
               >
                 <div className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded inline-block">
                   COMMUNITY & UMKM
@@ -646,7 +654,7 @@ const JMLCEventDetailPage: React.FC = () => {
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
               variants={cardVariants}
-              className="overflow-x-auto bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl"
+              className="overflow-x-auto bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl"
             >
               <table className="min-w-full text-sm">
                 <thead className="bg-gray-50">
@@ -722,13 +730,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-2 gap-6"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary">Juara 1</h4>
                 <p className="text-sm text-gray-600">
@@ -738,8 +747,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary">Juara 2</h4>
                 <p className="text-sm text-gray-600">
@@ -749,8 +760,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary">Juara 3</h4>
                 <p className="text-sm text-gray-600">
@@ -760,8 +773,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6"
               >
                 <h4 className="font-semibold text-primary">MVP</h4>
                 <p className="text-sm text-gray-600">
@@ -780,7 +795,6 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
             >
               <h2 className="section-h2 font-extrabold mb-4">
                 Sponsor Deliverables
@@ -825,7 +839,6 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
             >
               <h2 className="section-h2 font-extrabold mb-4">
                 Timeline Sponsor
@@ -868,13 +881,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="grid md:grid-cols-3 gap-4"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center"
               >
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-indigo-500 to-purple-600 mb-3"></div>
                 <div className="font-semibold">JEOS</div>
@@ -882,8 +896,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center"
               >
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-blue-500 to-cyan-400 mb-3"></div>
                 <div className="font-semibold">Nempo Garut</div>
@@ -891,8 +907,11 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center">
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6 text-center"
+              >
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-amber-400 to-yellow-500 mb-3"></div>
                 <div className="font-semibold">Garut Event</div>
                 <div className="text-xs text-gray-500">Main Organizer</div>
@@ -902,13 +921,14 @@ const JMLCEventDetailPage: React.FC = () => {
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
-              variants={staggerVariants}
               className="mt-6 grid md:grid-cols-3 gap-4 text-sm"
             >
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Produksi & Operasional
@@ -921,8 +941,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Kompetisi & Talents
@@ -935,8 +957,10 @@ const JMLCEventDetailPage: React.FC = () => {
               </motion.div>
               <motion.div
                 variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   Branding & Partnership
@@ -961,10 +985,9 @@ const JMLCEventDetailPage: React.FC = () => {
               {faqData.map((item, i) => (
                 <div key={i}>
                   <motion.div
-                    className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4 cursor-pointer"
+                    className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4 cursor-pointer"
                     onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
                     variants={cardVariants}
-                    whileHover="hover"
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.3 }}
@@ -998,7 +1021,7 @@ const JMLCEventDetailPage: React.FC = () => {
                         exit="exit"
                         variants={faqContentVariants}
                       >
-                        <p className="mt-2 text-sm text-gray-600 p-4 bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-xl shadow-inner">
+                        <p className="mt-2 text-sm text-gray-600 p-4 bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl shadow-inner">
                           {item.a}
                         </p>
                       </motion.div>
@@ -1029,30 +1052,27 @@ const JMLCEventDetailPage: React.FC = () => {
               <div className="mt-6 flex flex-wrap gap-3">
                 <motion.a
                   variants={buttonVariants}
-                  whileHover="hover"
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-5 py-3 rounded-lg bg-primary text-black font-semibold hover:bg-slate-200 transition"
+                  className="px-5 py-3 rounded-lg bg-primary text-black font-semibold transition hover:opacity-80"
                 >
                   Unduh Proposal PDF
                 </motion.a>
                 <motion.a
                   variants={buttonVariants}
-                  whileHover="hover"
                   whileTap="tap"
                   href="https://wa.me/6281234567890  "
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                  className="px-5 py-3 rounded-lg border border-gray-300 transition hover:bg-gray-100"
                 >
                   WhatsApp Panitia
                 </motion.a>
                 <motion.a
                   variants={buttonVariants}
-                  whileHover="hover"
                   whileTap="tap"
                   href="mailto:sponsor@jmlc.id?subject=JMLC%20Vol.2%20Sponsorship"
-                  className="px-5 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                  className="px-5 py-3 rounded-lg border border-gray-300 transition hover:bg-gray-100"
                 >
                   Email Kami
                 </motion.a>
@@ -1064,7 +1084,7 @@ const JMLCEventDetailPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true, amount: 0.3 }}
               onSubmit={handleSubmit}
-              className="bg-white/85 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
+              className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
             >
               <div className="grid md:grid-cols-2 gap-3">
                 <input
@@ -1073,7 +1093,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   placeholder="Nama Perusahaan"
-                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
                 />
                 <input
                   name="contactPerson"
@@ -1081,14 +1101,14 @@ const JMLCEventDetailPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   placeholder="PIC / Kontak"
-                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
                 />
               </div>
               <select
                 name="packageType"
                 value={formData.packageType}
                 onChange={handleInputChange}
-                className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800"
+                className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
               >
                 <option value="">Pilihan Paket</option>
                 <option>Diamond Sponsor</option>
@@ -1103,14 +1123,13 @@ const JMLCEventDetailPage: React.FC = () => {
                 onChange={handleInputChange}
                 rows={4}
                 placeholder="Catatan / kebutuhan aktivasi"
-                className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800"
+                className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
               ></textarea>
               <motion.button
                 variants={buttonVariants}
-                whileHover="hover"
                 whileTap="tap"
                 type="submit"
-                className="mt-2 px-5 py-3 rounded-lg font-semibold bg-primary text-black hover:bg-slate-200 transition"
+                className="mt-2 px-5 py-3 rounded-lg font-semibold bg-primary text-black transition hover:opacity-80"
               >
                 Kirim Minat
               </motion.button>
