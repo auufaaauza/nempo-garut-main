@@ -4,7 +4,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { MapPin, Utensils, Ticket, Users, BookOpen, UserCheck, Calendar, Rss } from 'lucide-react';
+import { MapPin, Utensils, Ticket, Users, BookOpen, UserCheck, Calendar, Rss, PersonStanding } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 
 // Definisikan tipe untuk setiap service
@@ -43,7 +43,7 @@ const HeroSection: React.FC = () => {
     { name: 'Tiket Event', icon: Calendar, path: '/event', color: 'from-red-500 to-rose-400' },
     { name: 'Influencer', icon: UserCheck, path: '/influencer-hub', color: 'from-teal-500 to-emerald-400' },
     { name: 'Komunitas', icon: Users, path: '/komunitas', color: 'from-indigo-500 to-violet-400' },
-    { name: 'Kamus', icon: BookOpen, path: '/kamus-sunda', color: 'from-lime-500 to-green-400' },
+    { name: 'Sponsorship', icon: PersonStanding, path: '/sponsorship', color: 'from-lime-500 to-green-400' },
     { name: 'Berita', icon: Rss, color: 'from-sky-500 to-blue-400' },
   ];
 

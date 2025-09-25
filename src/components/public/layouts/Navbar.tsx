@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from '../common/LanguageSwitcher';
-
 import { useLangStore } from '@/stores/language';
 
 type NavLink = {
@@ -18,7 +17,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showNavMenu, setShowNavMenu] = useState(false);
-  const { selectedLanguage, setLang } = useLangStore();
+  const { selectedLanguage } = useLangStore();
 
   const navLinks: NavLink[] = [
     { name: 'Home', path: '/' },
@@ -41,14 +40,15 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Background putih, shadow tipis saat scroll
   const headerVariants = {
     top: { 
-      backgroundColor: "rgba(255, 255, 255, 0)",
+      backgroundColor: "rgba(255, 255, 255, 1)", // putih
       boxShadow: "0 0 0 rgba(0,0,0,0)",
     },
     scrolled: {
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
+      backgroundColor: "rgba(255, 255, 255, 1)", // tetap putih saat scroll
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)",   // shadow tipis
     }
   };
 
@@ -102,8 +102,8 @@ const Navbar: React.FC = () => {
                       className={`text-sm font-semibold transition-colors whitespace-nowrap ${
                         pathname === link.path || 
                         (link.path !== '/' && pathname.startsWith(link.path + '/'))
-                          ? 'text-blue-400'
-                          : 'text-gray-600 hover:text-primary'
+                          ? 'text-gray-900' // link aktif gelap
+                          : 'text-gray-700 hover:text-gray-900' // default gelap
                       }`}
                     >
                       {link.name}
@@ -120,13 +120,13 @@ const Navbar: React.FC = () => {
                   variants={taglineVariants}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <span className="font-semibold text-gray-800 text-sm md:text-base whitespace-nowrap">
+                  <span className="font-semibold text-gray-900 text-sm md:text-base whitespace-nowrap">
                     {(({
                       EN: "Let's See,",
                       ID: "Mari Kita Lihat,",
                       SU: "Hayu Nempo,"
                     })[selectedLanguage] || "Let's See,")}{' '}
-                    <span className="text-primary">
+                    <span className="text-gray-900 font-bold">
                       {(({
                         EN: "Let's Love!",
                         ID: "Mari Cintai!",
@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2 pl-4">
-          <LanguageSwitcher className={isScrolled ? "text-blue-700" : "text-primary"} />
+          <LanguageSwitcher className="text-gray-900" />
         </div>
       </div>
     </motion.header>
