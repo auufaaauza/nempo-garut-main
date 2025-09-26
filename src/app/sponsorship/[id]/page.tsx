@@ -19,9 +19,7 @@ const JMLCEventDetailPage: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -69,7 +67,7 @@ const JMLCEventDetailPage: React.FC = () => {
   const buttonVariants = {
     tap: { scale: 0.95 },
   };
-  
+
   const faqData = [
     {
       q: "Apa metode pembayaran & invoice?",
@@ -94,6 +92,7 @@ const JMLCEventDetailPage: React.FC = () => {
   ];
 
   const packageOptions = [
+    { label: "Pilihan Paket", value: "" },
     { label: "Diamond Sponsor", value: "Diamond Sponsor" },
     { label: "Gold Sponsor", value: "Gold Sponsor" },
     { label: "Silver Sponsor", value: "Silver Sponsor" },
@@ -101,12 +100,13 @@ const JMLCEventDetailPage: React.FC = () => {
     { label: "Community & UMKM", value: "Community & UMKM" },
   ];
 
+  const handlePackageSelect = (value: string) => {
+    setFormData((prev) => ({ ...prev, packageType: value }));
+    setIsDropdownOpen(false);
+  };
+
   return (
     <>
-      <Head>
-        <title>Sponsorship — JEOS Mobile Legend Championship Vol. 2</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
 
       <motion.div
         initial="hidden"
@@ -118,9 +118,6 @@ const JMLCEventDetailPage: React.FC = () => {
         <section className="relative py-8 md:py-16">
           <div className="container grid md:grid-cols-2 gap-8 md:gap-10 items-center">
             <div className="order-2 md:order-1">
-              <p className="text-xs uppercase tracking-[.3em] text-gray-500">
-                Sponsorship Deck
-              </p>
               <h1 className="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
                 <span className="text-[#9F2798]">
                   JEOS Mobile Legend Championship
@@ -157,7 +154,7 @@ const JMLCEventDetailPage: React.FC = () => {
             </div>
             <div className="order-1 md:order-2">
               <div className="relative h-[240px] md:h-[480px] rounded-2xl p-4 md:p-6 overflow-hidden">
-                <div className="absolute inset-0 bg-white/50 backdrop-blur-3xl"></div>
+                <div className="absolute inset-0 bg-white/50"></div>
                 <div className="relative rounded-xl overflow-hidden ring-1 ring-gray-200 h-full w-full mx-auto">
                   {highlightImages.map((src, index) => (
                     <div
@@ -176,17 +173,17 @@ const JMLCEventDetailPage: React.FC = () => {
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-2 text-center mt-4">
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
                   <div className="text-xl md:text-2xl text-black font-bold">64</div>
                   <div className="text-[10px] md:text-[11px] text-gray-800">Tim</div>
                 </div>
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
                   <div className="text-xl md:text-2xl text-black font-bold">500+</div>
                   <div className="text-[10px] md:text-[11px] text-gray-800">
                     Penonton Offline
                   </div>
                 </div>
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
                   <div className="text-xl md:text-2xl text-black font-bold">10K+</div>
                   <div className="text-[10px] md:text-[11px] text-gray-800">
                     Digital Impressions
@@ -209,11 +206,11 @@ const JMLCEventDetailPage: React.FC = () => {
                 dan Garut Event.
               </p>
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4">
+                <div className="bg-white/50 border border-gray-300/60 rounded-lg p-4">
                   <div className="text-[#3B46A5] font-semibold">Format</div>
                   <div className="text-gray-700">Offline + Live Streaming</div>
                 </div>
-                <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-lg p-4">
+                <div className="bg-white/50 border border-gray-300/60 rounded-lg p-4">
                   <div className="text-[#3B46A5] font-semibold">Durasi</div>
                   <div className="text-gray-700">2 Hari (BO1–BO5)</div>
                 </div>
@@ -239,22 +236,22 @@ const JMLCEventDetailPage: React.FC = () => {
               Detail Acara
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">Lokasi</h4>
                 <p className="text-gray-700">Gedung Serbaguna Garut</p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">Tanggal</h4>
                 <p className="text-gray-700">Sabtu–Minggu, 14–15 Juni 2025</p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">Format</h4>
                 <p className="text-gray-700">
                   64 Tim · Knockout · BO1 (Qualifier) · BO3 (Semifinal) · BO5
                   (Grand Final)
                 </p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Rundown Singkat
                 </h4>
@@ -274,23 +271,23 @@ const JMLCEventDetailPage: React.FC = () => {
               Audiens & Media Value
             </h2>
             <div className="grid md:grid-cols-4 gap-4">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
                 <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">15–30 th</div>
                 <div className="text-xs text-gray-600">Segment usia</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
                 <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   IG · TikTok · YT
                 </div>
                 <div className="text-xs text-gray-600">Kanal distribusi</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
                 <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   Gaming · F&B
                 </div>
                 <div className="text-xs text-gray-600">Brand fit</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
                 <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   Slides & Overlay
                 </div>
@@ -307,7 +304,7 @@ const JMLCEventDetailPage: React.FC = () => {
               Sistem Turnamen
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Tahapan Kompetisi
                 </h4>
@@ -319,7 +316,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>Grand Final (BO5)</li>
                 </ol>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">Penghargaan</h4>
                 <ul className="text-sm text-gray-700 space-y-1">
                   <li>Juara 1–3 hadiah uang & sponsor</li>
@@ -338,7 +335,7 @@ const JMLCEventDetailPage: React.FC = () => {
               Media & Promotion Plan
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Online Campaign
                 </h4>
@@ -348,7 +345,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>• Streaming di YouTube & Facebook Gaming</li>
                 </ul>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Offline Activation
                 </h4>
@@ -370,7 +367,7 @@ const JMLCEventDetailPage: React.FC = () => {
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               {/* Diamond */}
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
                 <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
                   DIAMOND
                 </div>
@@ -390,7 +387,7 @@ const JMLCEventDetailPage: React.FC = () => {
                 </ul>
               </div>
               {/* Gold */}
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
                 <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
                   GOLD
                 </div>
@@ -406,7 +403,7 @@ const JMLCEventDetailPage: React.FC = () => {
                 </ul>
               </div>
               {/* Silver */}
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
                 <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
                   SILVER
                 </div>
@@ -423,7 +420,7 @@ const JMLCEventDetailPage: React.FC = () => {
             </div>
             {/* Supporting & UMKM */}
             <div className="grid md:grid-cols-2 gap-6 mt-6">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
                 <div className="text-xs bg-[#3B46A5] text-white px-2 py-1 rounded inline-block font-semibold">
                   SUPPORTING / IN-KIND
                 </div>
@@ -436,7 +433,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>Foto awarding + tag sponsor</li>
                 </ul>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
                 <div className="text-xs bg-[#3B46A5] text-white px-2 py-1 rounded inline-block font-semibold">
                   COMMUNITY & UMKM
                 </div>
@@ -462,7 +459,7 @@ const JMLCEventDetailPage: React.FC = () => {
             <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Perbandingan Benefit
             </h2>
-            <div className="overflow-x-auto bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl">
+            <div className="overflow-x-auto bg-white/50 border border-gray-300/60 rounded-xl">
               <table className="min-w-full text-sm">
                 <thead className="bg-[#3B46A5]/10">
                   <tr>
@@ -534,28 +531,28 @@ const JMLCEventDetailPage: React.FC = () => {
               Contoh Integrasi Hadiah Sponsor
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5]">Juara 1</h4>
                 <p className="text-sm text-gray-700">
                   Rp 6.000.000 + Voucher Hotel 2 Malam —{" "}
                   <i>by Hotel Partner</i>
                 </p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5]">Juara 2</h4>
                 <p className="text-sm text-gray-700">
                   Rp 4.000.000 + Voucher Restoran Rp 1.000.000 —{" "}
                   <i>by Café Sponsor</i>
                 </p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5]">Juara 3</h4>
                 <p className="text-sm text-gray-700">
                   Rp 2.500.000 + Merchandise Eksklusif —{" "}
                   <i>by Brand Lokal</i>
                 </p>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-6">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
                 <h4 className="font-semibold text-[#3B46A5]">MVP</h4>
                 <p className="text-sm text-gray-700">
                   Rp 500.000 + 1 Malam Villa —{" "}
@@ -629,24 +626,24 @@ const JMLCEventDetailPage: React.FC = () => {
               Organizer — Tiga Main Organizer Setara
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-[#3B46A5]/10 backdrop-blur-sm border border-[#3B46A5]/20 rounded-xl p-6 text-center">
+              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#9F2798] to-[#3B46A5] mb-3"></div>
                 <div className="font-semibold text-gray-800">JEOS</div>
                 <div className="text-xs text-gray-600">Main Organizer</div>
               </div>
-              <div className="bg-[#3B46A5]/10 backdrop-blur-sm border border-[#3B46A5]/20 rounded-xl p-6 text-center">
+              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#F4C01E] to-[#3B46A5] mb-3"></div>
                 <div className="font-semibold text-gray-800">Nempo Garut</div>
                 <div className="text-xs text-gray-600">Main Organizer</div>
               </div>
-              <div className="bg-[#3B46A5]/10 backdrop-blur-sm border border-[#3B46A5]/20 rounded-xl p-6 text-center">
+              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
                 <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#9F2798] to-[#F4C01E] mb-3"></div>
                 <div className="font-semibold text-gray-800">Garut Event</div>
                 <div className="text-xs text-gray-600">Main Organizer</div>
               </div>
             </div>
             <div className="mt-6 grid md:grid-cols-3 gap-4 text-sm">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Produksi & Operasional
                 </h4>
@@ -656,17 +653,16 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>• Tim teknis (sound, network, stream)</li>
                 </ul>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Kompetisi & Talents
                 </h4>
                 <ul className="text-gray-700 space-y-1">
                   <li>• Bracket & match schedule</li>
                   <li>• Caster, MC, juri, marshal</li>
-                  <li>• Technical meeting & rulebook</li>
                 </ul>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4">
+              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
                 <h4 className="font-semibold text-[#3B46A5] mb-2">
                   Branding & Partnership
                 </h4>
@@ -688,7 +684,10 @@ const JMLCEventDetailPage: React.FC = () => {
             </h2>
             <div className="space-y-3">
               {faqData.map((item, i) => (
-                <div key={i} className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl">
+                <div
+                  key={i}
+                  className="bg-white/50 border border-gray-300/60 rounded-xl overflow-hidden"
+                >
                   <div
                     className="cursor-pointer font-semibold text-gray-800 p-4 flex justify-between items-center"
                     onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
@@ -772,7 +771,7 @@ const JMLCEventDetailPage: React.FC = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
+              className="bg-white/50 border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
             >
               <div className="grid md:grid-cols-2 gap-3">
                 <input
@@ -793,7 +792,7 @@ const JMLCEventDetailPage: React.FC = () => {
                 />
               </div>
               <div className="relative">
-                <div 
+                <div
                   className={`block w-full px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800 cursor-pointer flex justify-between items-center transition-colors duration-200 ${isDropdownOpen ? 'rounded-b-none' : ''}`}
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
@@ -804,6 +803,7 @@ const JMLCEventDetailPage: React.FC = () => {
                     fill="currentColor"
                     className="h-4 w-4 text-gray-700"
                     animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </motion.svg>
@@ -811,17 +811,17 @@ const JMLCEventDetailPage: React.FC = () => {
                 <AnimatePresence>
                   {isDropdownOpen && (
                     <motion.div
-                      className="absolute z-10 w-full bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-b-lg overflow-hidden"
+                      className="absolute z-10 w-full bg-white/50 border border-gray-300/60 rounded-b-lg overflow-hidden mt-0.5"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {packageOptions.map((option) => (
+                      {packageOptions.map((option, index) => (
                         <div
-                          key={option.value}
+                          key={index}
                           onClick={() => {
-                            if (!option.disabled) {
+                            if (option.value) {
                               handlePackageSelect(option.value);
                             }
                           }}
