@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { motion, AnimatePresence, easeInOut } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const JMLCEventDetailPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,10 +16,11 @@ const JMLCEventDetailPage: React.FC = () => {
   });
 
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLInputElement | HTMLTextAreaElement
     >
   ) => {
     const { name, value } = e.target;
@@ -61,24 +61,15 @@ const JMLCEventDetailPage: React.FC = () => {
     return () => clearInterval(interval);
   }, [highlightImages.length]);
 
+  const mainVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
   const buttonVariants = {
     tap: { scale: 0.95 },
   };
-
-  const faqContentVariants = {
-    hidden: { height: 0, opacity: 0 },
-    visible: {
-      height: "auto",
-      opacity: 1,
-      transition: { duration: 0.4, ease: easeInOut },
-    },
-    exit: {
-      height: 0,
-      opacity: 0,
-      transition: { duration: 0.3, ease: easeInOut },
-    },
-  };
-
+  
   const faqData = [
     {
       q: "Apa metode pembayaran & invoice?",
@@ -102,6 +93,14 @@ const JMLCEventDetailPage: React.FC = () => {
     },
   ];
 
+  const packageOptions = [
+    { label: "Diamond Sponsor", value: "Diamond Sponsor" },
+    { label: "Gold Sponsor", value: "Gold Sponsor" },
+    { label: "Silver Sponsor", value: "Silver Sponsor" },
+    { label: "Supporting / In-Kind", value: "Supporting / In-Kind" },
+    { label: "Community & UMKM", value: "Community & UMKM" },
+  ];
+
   return (
     <>
       <Head>
@@ -109,26 +108,27 @@ const JMLCEventDetailPage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-white to-slate-200 text-foreground">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={mainVariants}
+        className="min-h-screen bg-gradient-to-br from-white to-slate-200 text-foreground"
+      >
         {/* HERO */}
-        <section className="relative py-16 md:py-24">
-          <div className="container grid md:grid-cols-2 gap-10 items-center">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+        <section className="relative py-8 md:py-16">
+          <div className="container grid md:grid-cols-2 gap-8 md:gap-10 items-center">
+            <div className="order-2 md:order-1">
               <p className="text-xs uppercase tracking-[.3em] text-gray-500">
                 Sponsorship Deck
               </p>
-              <h1 className="mt-3 hero-h1 font-extrabold leading-tight">
+              <h1 className="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
                 <span className="text-[#9F2798]">
                   JEOS Mobile Legend Championship
                 </span>
                 <br />
                 <span className="text-gray-900">Vol. 2 — 2025/2026</span>
               </h1>
-              <p className="mt-4 text-gray-600 max-w-xl">
+              <p className="mt-4 text-sm md:text-base text-gray-600 max-w-xl">
                 Be a Legend, Be a Champion. Ajang esports komunitas Garut yang
                 menggabungkan kompetisi, hiburan, dan kolaborasi brand.
               </p>
@@ -137,7 +137,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-5 py-3 rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
+                  className="px-4 py-2 text-sm rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
                 >
                   Download Proposal PDF
                 </motion.a>
@@ -145,62 +145,55 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="#packages"
-                  className="px-5 py-3 rounded-lg border border-gray-300 text-gray-800 transition hover:bg-gray-100"
+                  className="px-4 py-2 text-sm rounded-lg border border-gray-300 text-gray-800 transition hover:bg-gray-100"
                 >
                   Lihat Paket Sponsor
                 </motion.a>
               </div>
-              <div className="mt-6 text-xs text-gray-500">
+              <div className="mt-4 text-[10px] text-gray-500">
                 Diselenggarakan oleh <b>JEOS</b> · <b>Nempo Garut</b> ·{" "}
                 <b>Garut Event</b> (tiga <i>Main Organizer</i>)
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-[480px] rounded-2xl p-6 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-white/50 backdrop-blur-3xl"></div>
-
-              {/* Hero Banner Slideshow Otomatis */}
-              <div className="relative rounded-xl overflow-hidden ring-1 ring-gray-200 h-full w-full mx-auto">
-                {highlightImages.map((src, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <img
-                      src={src}
-                      alt={`Dokumentasi JMLC Vol. 1 - Slide ${index + 1}`}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Statistik */}
-              <div className="grid grid-cols-3 gap-3 text-center absolute bottom-3 left-6 right-6 p-4">
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-4">
-                  <div className="text-2xl text-black font-bold">64</div>
-                  <div className="text-[11px] text-gray-800">Tim</div>
+            </div>
+            <div className="order-1 md:order-2">
+              <div className="relative h-[240px] md:h-[480px] rounded-2xl p-4 md:p-6 overflow-hidden">
+                <div className="absolute inset-0 bg-white/50 backdrop-blur-3xl"></div>
+                <div className="relative rounded-xl overflow-hidden ring-1 ring-gray-200 h-full w-full mx-auto">
+                  {highlightImages.map((src, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                        index === currentSlide ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <img
+                        src={src}
+                        alt={`Dokumentasi JMLC Vol. 1 - Slide ${index + 1}`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-4">
-                  <div className="text-2xl text-black font-bold">500+</div>
-                  <div className="text-[11px] text-gray-800">
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-center mt-4">
+                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                  <div className="text-xl md:text-2xl text-black font-bold">64</div>
+                  <div className="text-[10px] md:text-[11px] text-gray-800">Tim</div>
+                </div>
+                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                  <div className="text-xl md:text-2xl text-black font-bold">500+</div>
+                  <div className="text-[10px] md:text-[11px] text-gray-800">
                     Penonton Offline
                   </div>
                 </div>
-                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-4">
-                  <div className="text-2xl text-black font-bold">10K+</div>
-                  <div className="text-[11px] text-gray-800">
+                <div className="bg-[#F4C01E]/80 backdrop-blur-sm border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
+                  <div className="text-xl md:text-2xl text-black font-bold">10K+</div>
+                  <div className="text-[10px] md:text-[11px] text-gray-800">
                     Digital Impressions
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -208,8 +201,8 @@ const JMLCEventDetailPage: React.FC = () => {
         <section id="about" className="py-12 md:py-16 bg-[#F4C01E]/10">
           <div className="container grid md:grid-cols-2 gap-10">
             <div className="space-y-4">
-              <h2 className="section-h2 font-extrabold text-[#9F2798]">Tentang Event</h2>
-              <p className="text-gray-700">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#9F2798]">Tentang Event</h2>
+              <p className="text-sm md:text-base text-gray-700">
                 JEOS Mobile Legend Championship (JMLC) Vol. 2 adalah turnamen{" "}
                 <i>Mobile Legends: Bang Bang</i> skala komunitas yang dikemas
                 profesional oleh tiga <b>Main Organizer</b>: JEOS, Nempo Garut,
@@ -227,7 +220,7 @@ const JMLCEventDetailPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-extrabold mb-3 text-[#3B46A5]">Event Goals</h3>
+              <h3 className="text-xl md:text-2xl font-extrabold mb-3 text-[#3B46A5]">Event Goals</h3>
               <ul className="space-y-2 text-gray-700 text-sm">
                 <li>• Empower local gamers — panggung kompetitif terstruktur.</li>
                 <li>• Build esports ecosystem — kolaborasi organizer, sponsor, media, UMKM.</li>
@@ -242,7 +235,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* EVENT DETAILS */}
         <section id="event-details" className="py-16">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Detail Acara
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -277,28 +270,28 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* AUDIENCE */}
         <section id="audience" className="py-12 bg-[#F4C01E]/10">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Audiens & Media Value
             </h2>
             <div className="grid md:grid-cols-4 gap-4">
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5">
-                <div className="text-3xl font-bold text-[#3B46A5]">15–30 th</div>
+              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">15–30 th</div>
                 <div className="text-xs text-gray-600">Segment usia</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5">
-                <div className="text-3xl font-bold text-[#3B46A5]">
+              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   IG · TikTok · YT
                 </div>
                 <div className="text-xs text-gray-600">Kanal distribusi</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5">
-                <div className="text-3xl font-bold text-[#3B46A5]">
+              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   Gaming · F&B
                 </div>
                 <div className="text-xs text-gray-600">Brand fit</div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-5">
-                <div className="text-3xl font-bold text-[#3B46A5]">
+              <div className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-3 md:p-5">
+                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
                   Slides & Overlay
                 </div>
                 <div className="text-xs text-gray-600">Shout-out sponsor</div>
@@ -310,7 +303,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* TOURNAMENT SYSTEM */}
         <section id="tournament-system" className="py-16">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Sistem Turnamen
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -341,7 +334,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* MEDIA PLAN */}
         <section id="media-plan" className="py-16 bg-[#F4C01E]/10">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Media & Promotion Plan
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -372,7 +365,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* SPONSOR PACKAGES */}
         <section id="packages" className="py-12 md:py-16">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Paket Sponsor
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -466,7 +459,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* COMPARISON TABLE */}
         <section id="compare" className="py-12 bg-[#F4C01E]/10">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Perbandingan Benefit
             </h2>
             <div className="overflow-x-auto bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl">
@@ -537,7 +530,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* PRIZE INTEGRATION */}
         <section className="py-12">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Contoh Integrasi Hadiah Sponsor
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -574,10 +567,10 @@ const JMLCEventDetailPage: React.FC = () => {
         </section>
 
         {/* DELIVERABLES & TIMELINE */}
-        <section id="deliverables" className="py-12 md:py-16 bg-[#F4C01E]/10">
+        <section id="deliverables" className="py-12 md:py-16">
           <div className="container grid md:grid-cols-2 gap-10">
             <div>
-              <h2 className="section-h2 font-extrabold mb-4 text-[#9F2798]">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
                 Sponsor Deliverables
               </h2>
               <ul className="text-sm text-gray-700 space-y-2">
@@ -598,7 +591,7 @@ const JMLCEventDetailPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h2 className="section-h2 font-extrabold mb-4 text-[#9F2798]">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
                 Timeline Sponsor
               </h2>
               <ol className="text-sm text-gray-700 space-y-3">
@@ -632,7 +625,7 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* ORGANIZER */}
         <section className="py-12">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               Organizer — Tiga Main Organizer Setara
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -690,51 +683,47 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* FAQ */}
         <section id="faq" className="py-12 md:py-16 bg-[#F4C01E]/10">
           <div className="container">
-            <h2 className="section-h2 font-extrabold text-center mb-6 text-[#9F2798]">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
               FAQ Sponsor
             </h2>
             <div className="space-y-3">
               {faqData.map((item, i) => (
-                <div key={i}>
+                <div key={i} className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl">
                   <div
-                    className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl p-4 cursor-pointer"
+                    className="cursor-pointer font-semibold text-gray-800 p-4 flex justify-between items-center"
                     onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
                   >
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-semibold text-gray-800">{item.q}</h4>
-                      <motion.svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2}
-                        stroke="currentColor"
-                        className="w-5 h-5 text-[#3B46A5]"
-                        animate={{ rotate: openFAQ === i ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                        />
-                      </motion.svg>
-                    </div>
+                    <h4>{item.q}</h4>
+                    <motion.svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="w-5 h-5 text-[#3B46A5] transform transition-transform duration-300"
+                      animate={{ rotate: openFAQ === i ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </motion.svg>
                   </div>
-                  <AnimatePresence>
-                    {openFAQ === i && (
-                      <motion.div
-                        className="overflow-hidden"
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        variants={faqContentVariants}
-                      >
-                        <p className="mt-2 text-sm text-gray-700 p-4 bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-xl shadow-inner">
-                          {item.a}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {openFAQ === i && (
+                    <motion.div
+                      className="overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                    >
+                      <p className="mt-2 text-sm text-gray-700 p-4 border-t border-gray-200">
+                        {item.a}
+                      </p>
+                    </motion.div>
+                  )}
                 </div>
               ))}
             </div>
@@ -744,13 +733,8 @@ const JMLCEventDetailPage: React.FC = () => {
         {/* CONTACT */}
         <section id="contact" className="py-12 md:py-16">
           <div className="container grid md:grid-cols-2 gap-10 items-center">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <h2 className="section-h2 font-extrabold mb-4 text-[#9F2798]">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
                 Bergabung sebagai Sponsor
               </h2>
               <p className="text-gray-700">
@@ -762,7 +746,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-5 py-3 rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
+                  className="px-4 py-2 text-sm rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
                 >
                   Unduh Proposal PDF
                 </motion.a>
@@ -772,7 +756,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   href="https://wa.me/6281234567890  "
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
+                  className="px-4 py-2 text-sm rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
                 >
                   WhatsApp Panitia
                 </motion.a>
@@ -780,17 +764,13 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="mailto:sponsor@jmlc.id?subject=JMLC%20Vol.2%20Sponsorship"
-                  className="px-5 py-3 rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
+                  className="px-4 py-2 text-sm rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
                 >
                   Email Kami
                 </motion.a>
               </div>
-            </motion.div>
-            <motion.form
-              initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.3 }}
+            </div>
+            <form
               onSubmit={handleSubmit}
               className="bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
             >
@@ -812,19 +792,48 @@ const JMLCEventDetailPage: React.FC = () => {
                   className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
                 />
               </div>
-              <select
-                name="packageType"
-                value={formData.packageType}
-                onChange={handleInputChange}
-                className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
-              >
-                <option value="">Pilihan Paket</option>
-                <option>Diamond Sponsor</option>
-                <option>Gold Sponsor</option>
-                <option>Silver Sponsor</option>
-                <option>Supporting / In-Kind</option>
-                <option>Community & UMKM</option>
-              </select>
+              <div className="relative">
+                <div 
+                  className={`block w-full px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800 cursor-pointer flex justify-between items-center transition-colors duration-200 ${isDropdownOpen ? 'rounded-b-none' : ''}`}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  <span>{formData.packageType || "Pilihan Paket"}</span>
+                  <motion.svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="h-4 w-4 text-gray-700"
+                    animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                  >
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </motion.svg>
+                </div>
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.div
+                      className="absolute z-10 w-full bg-white/50 backdrop-blur-sm border border-gray-300/60 rounded-b-lg overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {packageOptions.map((option) => (
+                        <div
+                          key={option.value}
+                          onClick={() => {
+                            if (!option.disabled) {
+                              handlePackageSelect(option.value);
+                            }
+                          }}
+                          className={`px-4 py-2 cursor-pointer transition-colors ${formData.packageType === option.value ? 'bg-[#F4C01E]/30 font-semibold' : 'hover:bg-gray-200'}`}
+                        >
+                          {option.label}
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <textarea
                 name="notes"
                 value={formData.notes}
@@ -837,15 +846,15 @@ const JMLCEventDetailPage: React.FC = () => {
                 variants={buttonVariants}
                 whileTap="tap"
                 type="submit"
-                className="mt-2 px-5 py-3 rounded-lg font-semibold bg-[#9F2798] text-white transition hover:opacity-80"
+                className="mt-2 px-4 py-2 text-sm rounded-lg font-semibold bg-[#9F2798] text-white transition hover:opacity-80"
               >
                 Kirim Minat
               </motion.button>
-              <p className="text-[11px] text-gray-500">
+              <p className="text-[10px] text-gray-500">
                 *Form ini contoh tampilan. Integrasikan ke backend/Google Form
                 sesuai kebutuhan.
               </p>
-            </motion.form>
+            </form>
           </div>
         </section>
 
@@ -853,7 +862,7 @@ const JMLCEventDetailPage: React.FC = () => {
         <footer className="border-t border-gray-200 py-8 text-center text-xs text-gray-500">
           © JMLC Vol. 2 — JEOS · Nempo Garut · Garut Event
         </footer>
-      </div>
+      </motion.div>
     </>
   );
 };
