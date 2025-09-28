@@ -22,7 +22,7 @@ export interface SponsorshipItem {
       category: "Game",
       // price: { current: 3000000, total: 10000000 },
       banner:
-        "https://i.pinimg.com/736x/34/43/6c/34436c8603ae4895ffc36dce5d61f794.jpg",
+        "/images/banner-card.jpg",
       benefits: [
         "Logo besar di banner utama.",
         "Publikasi di media partner.",
