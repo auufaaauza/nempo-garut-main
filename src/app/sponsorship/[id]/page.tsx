@@ -465,7 +465,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   Rp 250.000 + Product — <i>by UMKM</i>
                 </p>
               </div>
-              <div className="lg:col-start-2"> {/* Ini yang baru untuk memposisikan di tengah */}
+              <div className="md:col-span-2 lg:col-span-1 lg:col-start-2">
                 <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
                   <h4 className="font-bold text-blue-800">MVP</h4>
                   <p className="text-sm text-gray-700 mt-1">
