@@ -1,3 +1,4 @@
+// JMLCEventDetailPage.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -61,7 +62,11 @@ const JMLCEventDetailPage: React.FC = () => {
 
   const mainVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const buttonVariants = {
@@ -104,37 +109,39 @@ const JMLCEventDetailPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, packageType: value }));
     setIsDropdownOpen(false);
   };
-
   return (
     <>
-
+      <Head>
+        <title>JMLC Vol. 2 Sponsorship</title>
+        <meta name="description" content="Jawa Barat Mobile Legend Championship Sponsorship Page" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+      </Head>
       <motion.div
         initial="hidden"
         animate="visible"
         variants={mainVariants}
-        className="min-h-screen bg-gradient-to-br from-white to-slate-200 text-foreground"
+        className="font-lato min-h-screen bg-white text-gray-800"
       >
         {/* HERO */}
-        <section className="relative py-8 md:py-16">
-          <div className="container grid md:grid-cols-2 gap-8 md:gap-10 items-center">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-indigo-100">
+          <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div className="order-2 md:order-1">
-              <h1 className="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
-                <span className="text-[#9F2798]">
-                  JEOS Mobile Legend Championship
-                </span>
+              <h1 className="mt-3 text-4xl md:text-6xl font-extrabold leading-tight font-montserrat text-purple-800">
+                JEOS Mobile Legend Championship
                 <br />
-                <span className="text-gray-900">Vol. 2 — 2025/2026</span>
+                <span className="text-gray-900">Vol. 2 2025 Se-Jawa Barat</span>
               </h1>
-              <p className="mt-4 text-sm md:text-base text-gray-600 max-w-xl">
-                Be a Legend, Be a Champion. Ajang esports komunitas Garut yang
-                menggabungkan kompetisi, hiburan, dan kolaborasi brand.
+              <p className="mt-6 text-base md:text-lg text-gray-600 max-w-xl">
+                Be a Legend, Be a Champion. Turnamen MLBB skala provinsi dengan sistem multi-kota, Garut offline day dan Final 1 hari Prizepool Rp 22.000.000 dibagi sampai top 16.
               </p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <motion.a
                   variants={buttonVariants}
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-4 py-2 text-sm rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
+                  className="px-6 py-3 text-lg rounded-full bg-purple-800 text-white font-bold shadow-lg hover:bg-purple-900 transition-colors"
                 >
                   Download Proposal PDF
                 </motion.a>
@@ -142,20 +149,19 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="#packages"
-                  className="px-4 py-2 text-sm rounded-lg border border-gray-300 text-gray-800 transition hover:bg-gray-100"
+                  className="px-6 py-3 text-lg rounded-full border-2 border-purple-800 text-purple-800 font-semibold transition-colors hover:bg-purple-800 hover:text-white"
                 >
                   Lihat Paket Sponsor
                 </motion.a>
               </div>
-              <div className="mt-4 text-[10px] text-gray-500">
-                Diselenggarakan oleh <b>JEOS</b> · <b>Nempo Garut</b> ·{" "}
-                <b>Garut Event</b> (tiga <i>Main Organizer</i>)
+              <div className="mt-6 text-sm text-gray-500">
+                Diselenggarakan oleh <b>JEOS</b> · <b>Nempo Garut</b> · <b>Garut Event</b> (tiga <i>Main Organizer</i>)
               </div>
             </div>
-            <div className="order-1 md:order-2">
-              <div className="relative h-[240px] md:h-[480px] rounded-2xl p-4 md:p-6 overflow-hidden">
+            <div className="order-1 md:order-2 relative">
+              <div className="relative h-[300px] md:h-[500px] rounded-3xl p-6 md:p-8 overflow-hidden bg-white/60 shadow-xl">
                 <div className="absolute inset-0 bg-white/50"></div>
-                <div className="relative rounded-xl overflow-hidden ring-1 ring-gray-200 h-full w-full mx-auto">
+                <div className="relative rounded-2xl overflow-hidden shadow-inner h-full w-full">
                   {highlightImages.map((src, index) => (
                     <div
                       key={index}
@@ -166,219 +172,148 @@ const JMLCEventDetailPage: React.FC = () => {
                       <img
                         src={src}
                         alt={`Dokumentasi JMLC Vol. 1 - Slide ${index + 1}`}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-center mt-4">
-                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
-                  <div className="text-xl md:text-2xl text-black font-bold">64</div>
-                  <div className="text-[10px] md:text-[11px] text-gray-800">Tim</div>
+              <div className="grid grid-cols-3 gap-4 text-center mt-6">
+                <div className="bg-yellow-300/80 border border-yellow-400/60 rounded-xl p-4 md:p-6 shadow-md">
+                  <div className="text-2xl md:text-3xl text-black font-bold font-montserrat">128</div>
+                  <div className="text-sm text-gray-800 mt-1">Tim</div>
                 </div>
-                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
-                  <div className="text-xl md:text-2xl text-black font-bold">500+</div>
-                  <div className="text-[10px] md:text-[11px] text-gray-800">
-                    Penonton Offline
-                  </div>
+                <div className="bg-yellow-300/80 border border-yellow-400/60 rounded-xl p-4 md:p-6 shadow-md">
+                  <div className="text-2xl md:text-3xl text-black font-bold font-montserrat">200+</div>
+                  <div className="text-sm text-gray-800 mt-1">Penonton Offline</div>
                 </div>
-                <div className="bg-[#F4C01E]/80 border border-[#F4C01E]/60 rounded-xl p-2 md:p-4">
-                  <div className="text-xl md:text-2xl text-black font-bold">10K+</div>
-                  <div className="text-[10px] md:text-[11px] text-gray-800">
-                    Digital Impressions
-                  </div>
+                <div className="bg-yellow-300/80 border border-yellow-400/60 rounded-xl p-4 md:p-6 shadow-md">
+                  <div className="text-2xl md:text-3xl text-black font-bold font-montserrat">100K+</div>
+                  <div className="text-sm text-gray-800 mt-1">Digital Impressions</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* --- */}
+
         {/* ABOUT */}
-        <section id="about" className="py-12 md:py-16 bg-[#F4C01E]/10">
-          <div className="container grid md:grid-cols-2 gap-10">
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-[#9F2798]">Tentang Event</h2>
-              <p className="text-sm md:text-base text-gray-700">
-                JEOS Mobile Legend Championship (JMLC) Vol. 2 adalah turnamen{" "}
-                <i>Mobile Legends: Bang Bang</i> skala komunitas yang dikemas
-                profesional oleh tiga <b>Main Organizer</b>: JEOS, Nempo Garut,
-                dan Garut Event.
+        <section id="about" className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-purple-800">
+                Tentang Event
+              </h2>
+              <p className="text-base md:text-lg text-gray-700">
+                JMLC Vol. 2 adalah turnamen Mobile Legends: Bang Bang skala provinsi (Jawa Barat) yang menggabungkan kompetisi profesional dan kolaborasi brand. Format multi-kota memastikan pemerataan kesempatan dan membangun ekosistem esports lokal.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="bg-white/50 border border-gray-300/60 rounded-lg p-4">
-                  <div className="text-[#3B46A5] font-semibold">Format</div>
-                  <div className="text-gray-700">Offline + Live Streaming</div>
+              <div className="grid grid-cols-2 gap-4 text-base">
+                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                  <div className="text-blue-800 font-bold">Format</div>
+                  <div className="text-gray-700 mt-1">Online + Offline 1 Hari Final</div>
                 </div>
-                <div className="bg-white/50 border border-gray-300/60 rounded-lg p-4">
-                  <div className="text-[#3B46A5] font-semibold">Durasi</div>
-                  <div className="text-gray-700">2 Hari (BO1–BO5)</div>
+                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                  <div className="text-blue-800 font-bold">Skala</div>
+                  <div className="text-gray-700 mt-1">128 Tim . 4 Regional </div>
                 </div>
               </div>
             </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-extrabold mb-3 text-[#3B46A5]">Event Goals</h3>
-              <ul className="space-y-2 text-gray-700 text-sm">
-                <li>• Empower local gamers — panggung kompetitif terstruktur.</li>
-                <li>• Build esports ecosystem — kolaborasi organizer, sponsor, media, UMKM.</li>
-                <li>• Boost community engagement — ruang interaksi & hiburan positif.</li>
-                <li>• Increase sponsor visibility — exposure offline/online terukur.</li>
-                <li>• Promote Garut as creative hub — citra kota kreatif & digital.</li>
+            <div className="space-y-6">
+              <h3 className="text-2xl md:text-3xl font-extrabold font-montserrat text-blue-800">
+                Tujuan Event
+              </h3>
+              <ul className="space-y-3 text-gray-700 text-base list-disc pl-5">
+                <li>Menyediakan panggung kompetitif yang adil (double elimination).</li>
+                <li>Membangun jejaring sponsor–komunitas–media di Jawa Barat.</li>
+                <li>Meningkatkan engagement digital & kehadiran offline.</li>
+                <li>Mengangkat citra daerah sebagai hub esports kreatif.</li>
               </ul>
             </div>
           </div>
         </section>
 
+        {/* --- */}
+
         {/* EVENT DETAILS */}
-        <section id="event-details" className="py-16">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section id="event-details" className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Detail Acara
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">Lokasi</h4>
-                <p className="text-gray-700">Gedung Serbaguna Garut</p>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800 mb-2">Lokasi</h4>
+                <p className="text-gray-700 text-lg">Garut</p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">Tanggal</h4>
-                <p className="text-gray-700">Sabtu–Minggu, 14–15 Juni 2025</p>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800 mb-2">Tanggal</h4>
+                <p className="text-gray-700 text-lg">13-14 Desember 2025</p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">Format</h4>
-                <p className="text-gray-700">
-                  64 Tim · Knockout · BO1 (Qualifier) · BO3 (Semifinal) · BO5
-                  (Grand Final)
-                </p>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800 mb-2">Format</h4>
+                <p className="text-gray-700 text-lg">128 Tim · Knockout · BO1 (Qualifier) · BO3 (Semifinal) · BO5 (Grand Final)</p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
-                  Rundown Singkat
-                </h4>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>Hari 1: Registrasi · Opening · Penyisihan</li>
-                  <li>Hari 2: Semifinal · Grand Final · Awarding · Closing</li>
-                </ul>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800 mb-2">Rundown Singkat</h4>
+                <p className="text-gray-700 text-lg">Hari 1: Registrasi · Opening · Semifinal · Grand Final · Awarding · Closing</p>
               </div>
             </div>
           </div>
         </section>
 
+        {/* --- */}
+
         {/* AUDIENCE */}
-        <section id="audience" className="py-12 bg-[#F4C01E]/10">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section id="audience" className="py-16 bg-gray-50">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Audiens & Media Value
             </h2>
             <div className="grid md:grid-cols-4 gap-4">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
-                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">15–30 th</div>
-                <div className="text-xs text-gray-600">Segment usia</div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 text-center">
+                <div className="text-3xl md:text-4xl font-bold font-montserrat text-blue-800">15–30 th</div>
+                <div className="text-sm text-gray-600 mt-1">Segment usia</div>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
-                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
-                  IG · TikTok · YT
-                </div>
-                <div className="text-xs text-gray-600">Kanal distribusi</div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 text-center">
+                <div className="text-2xl md:text-3xl font-bold font-montserrat text-blue-800">Instagram · TikTok · Website</div>
+                <div className="text-sm text-gray-600 mt-1">Kanal distribusi</div>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
-                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
-                  Gaming · F&B
-                </div>
-                <div className="text-xs text-gray-600">Brand fit</div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 text-center">
+                <div className="text-2xl md:text-3xl font-bold font-montserrat text-blue-800">Gaming · F&B</div>
+                <div className="text-sm text-gray-600 mt-1">Brand fit</div>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-3 md:p-5">
-                <div className="text-2xl md:text-3xl font-bold text-[#3B46A5]">
-                  Slides & Overlay
-                </div>
-                <div className="text-xs text-gray-600">Shout-out sponsor</div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 text-center">
+                <div className="text-2xl md:text-3xl font-bold font-montserrat text-blue-800">Slides & Overlay</div>
+                <div className="text-sm text-gray-600 mt-1">Shout-out sponsor</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* TOURNAMENT SYSTEM */}
-        <section id="tournament-system" className="py-16">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
-              Sistem Turnamen
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
-                  Tahapan Kompetisi
-                </h4>
-                <ol className="list-decimal list-inside text-sm text-gray-700 space-y-1">
-                  <li>Pendaftaran Online</li>
-                  <li>Technical Meeting</li>
-                  <li>Penyisihan (BO1)</li>
-                  <li>Semifinal (BO3)</li>
-                  <li>Grand Final (BO5)</li>
-                </ol>
-              </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">Penghargaan</h4>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>Juara 1–3 hadiah uang & sponsor</li>
-                  <li>MVP Player</li>
-                  <li>Best Play Highlight</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* MEDIA PLAN */}
-        <section id="media-plan" className="py-16 bg-[#F4C01E]/10">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
-              Media & Promotion Plan
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
-                  Online Campaign
-                </h4>
-                <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Teaser & countdown di Instagram, TikTok, YouTube</li>
-                  <li>• Ads targeting gamers Garut & Bandung</li>
-                  <li>• Streaming di YouTube & Facebook Gaming</li>
-                </ul>
-              </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
-                  Offline Activation
-                </h4>
-                <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Banner & backdrop venue</li>
-                  <li>• Booth sponsor</li>
-                  <li>• MC & caster mention sesuai paket</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* --- */}
 
         {/* SPONSOR PACKAGES */}
-        <section id="packages" className="py-12 md:py-16">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section id="packages" className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Paket Sponsor
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-8">
               {/* Diamond */}
-              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
-                <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
-                  DIAMOND
-                </div>
-                <div className="mt-2 text-2xl font-bold text-[#9F2798]">
-                  Rp 20–25 Juta
-                </div>
-                <ul className="mt-4 text-sm text-gray-700 space-y-2">
-                  <li>
-                    Nama di depan event:{" "}
-                    <b>“JMLC Vol. 2 presented by [Sponsor]”</b>
-                  </li>
+              <div className="relative bg-gray-50 rounded-3xl p-8 shadow-xl border-4 border-purple-800/80 transition-transform transform hover:scale-105">
+                <div className="text-sm bg-yellow-300 text-black px-3 py-1.5 rounded-full inline-block font-semibold">MYTHIC</div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="absolute -top-4 right-4 text-xs font-bold bg-purple-800 text-white px-4 py-2 rounded-full shadow-lg transform rotate-6"
+                >
+                  PILIHAN TERBAIK
+                </motion.div>
+                <div className="mt-4 text-3xl font-bold font-montserrat text-purple-800">Rp 20–25 Juta</div>
+                <ul className="mt-6 text-base text-gray-700 space-y-3 list-disc pl-5">
+                  <li>Nama di depan event: <b>“JMLC Vol. 2 presented by [Sponsor]”</b></li>
                   <li>Logo terbesar (backdrop, banner, jersey, overlay)</li>
                   <li>Booth eksklusif + product showcase sebelum final</li>
                   <li>MC & caster mention sepanjang acara</li>
@@ -387,14 +322,10 @@ const JMLCEventDetailPage: React.FC = () => {
                 </ul>
               </div>
               {/* Gold */}
-              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
-                <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
-                  GOLD
-                </div>
-                <div className="mt-2 text-2xl font-bold text-[#9F2798]">
-                  Rp 10–15 Juta
-                </div>
-                <ul className="mt-4 text-sm text-gray-700 space-y-2">
+              <div className="bg-gray-50 rounded-3xl p-8 shadow-xl border border-gray-200 transition-transform transform hover:scale-105">
+                <div className="text-sm bg-yellow-300 text-black px-3 py-1.5 rounded-full inline-block font-semibold">LEGEND</div>
+                <div className="mt-4 text-3xl font-bold font-montserrat text-purple-800">Rp 10–15 Juta</div>
+                <ul className="mt-6 text-base text-gray-700 space-y-3 list-disc pl-5">
                   <li>Logo besar (backdrop, banner, overlay)</li>
                   <li>Booth/stand di venue</li>
                   <li>MC mention tiap babak penting</li>
@@ -403,14 +334,10 @@ const JMLCEventDetailPage: React.FC = () => {
                 </ul>
               </div>
               {/* Silver */}
-              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
-                <div className="text-xs bg-[#F4C01E] text-black px-2 py-1 rounded inline-block font-semibold">
-                  SILVER
-                </div>
-                <div className="mt-2 text-2xl font-bold text-[#9F2798]">
-                  Rp 3–5 Juta
-                </div>
-                <ul className="mt-4 text-sm text-gray-700 space-y-2">
+              <div className="bg-gray-50 rounded-3xl p-8 shadow-xl border border-gray-200 transition-transform transform hover:scale-105">
+                <div className="text-sm bg-yellow-300 text-black px-3 py-1.5 rounded-full inline-block font-semibold">EPIC</div>
+                <div className="mt-4 text-3xl font-bold font-montserrat text-purple-800">Rp 3–5 Juta</div>
+                <ul className="mt-6 text-base text-gray-700 space-y-3 list-disc pl-5">
                   <li>Logo sedang (banner & overlay)</li>
                   <li>MC mention opening & closing</li>
                   <li>Produk di meja caster/panitia</li>
@@ -418,32 +345,21 @@ const JMLCEventDetailPage: React.FC = () => {
                 </ul>
               </div>
             </div>
-            {/* Supporting & UMKM */}
-            <div className="grid md:grid-cols-2 gap-6 mt-6">
-              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
-                <div className="text-xs bg-[#3B46A5] text-white px-2 py-1 rounded inline-block font-semibold">
-                  SUPPORTING / IN-KIND
-                </div>
-                <div className="mt-2 text-xl font-bold text-[#9F2798]">
-                  Barter Produk/Jasa
-                </div>
-                <ul className="mt-3 text-sm text-gray-700 space-y-2">
+            <div className="grid lg:grid-cols-2 gap-8 mt-8">
+              <div className="bg-gray-50 rounded-3xl p-8 shadow-xl border border-gray-200 transition-transform transform hover:scale-105">
+                <div className="text-sm bg-blue-800 text-white px-3 py-1.5 rounded-full inline-block font-semibold">SUPPORTING / IN-KIND</div>
+                <div className="mt-4 text-xl font-bold font-montserrat text-purple-800">Barter Produk/Jasa</div>
+                <ul className="mt-6 text-base text-gray-700 space-y-3 list-disc pl-5">
                   <li>Produk dibagikan/dipakai peserta & penonton</li>
                   <li>Logo kecil di media sosial + MC mention awarding</li>
                   <li>Foto awarding + tag sponsor</li>
                 </ul>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-2xl p-6">
-                <div className="text-xs bg-[#3B46A5] text-white px-2 py-1 rounded inline-block font-semibold">
-                  COMMUNITY & UMKM
-                </div>
-                <div className="mt-2 text-xl font-bold text-[#9F2798]">
-                  Rp 500 rb – Rp 1 Juta
-                </div>
-                <ul className="mt-3 text-sm text-gray-700 space-y-2">
-                  <li>
-                    Logo pada slide <b>Community Supporter</b>
-                  </li>
+              <div className="bg-gray-50 rounded-3xl p-8 shadow-xl border border-gray-200 transition-transform transform hover:scale-105">
+                <div className="text-sm bg-blue-800 text-white px-3 py-1.5 rounded-full inline-block font-semibold">COMMUNITY & UMKM</div>
+                <div className="mt-4 text-xl font-bold font-montserrat text-purple-800">Rp 500 rb – Rp 1 Juta</div>
+                <ul className="mt-6 text-base text-gray-700 space-y-3 list-disc pl-5">
+                  <li>Logo pada slide <b>Community Supporter</b></li>
                   <li>MC mention sesi apresiasi</li>
                   <li>Meja kecil promosi di venue (opsional)</li>
                   <li>Produk bisa jadi hadiah hiburan</li>
@@ -453,64 +369,43 @@ const JMLCEventDetailPage: React.FC = () => {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* COMPARISON TABLE */}
-        <section id="compare" className="py-12 bg-[#F4C01E]/10">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section id="compare" className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Perbandingan Benefit
             </h2>
-            <div className="overflow-x-auto bg-white/50 border border-gray-300/60 rounded-xl">
-              <table className="min-w-full text-sm">
-                <thead className="bg-[#3B46A5]/10">
+            <div className="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-200">
+              <table className="min-w-full text-base">
+                <thead className="bg-blue-800/10">
                   <tr>
-                    <th className="px-4 py-3 text-left text-gray-800">Benefit</th>
-                    <th className="px-4 py-3 text-[#3B46A5]">Diamond</th>
-                    <th className="px-4 py-3 text-[#3B46A5]">Gold</th>
-                    <th className="px-4 py-3 text-[#3B46A5]">Silver</th>
-                    <th className="px-4 py-3 text-[#3B46A5]">UMKM/Supporting</th>
+                    <th className="px-6 py-4 text-left font-bold text-gray-800">Benefit</th>
+                    <th className="px-6 py-4 text-center font-bold text-blue-800">Mythic</th>
+                    <th className="px-6 py-4 text-center font-bold text-blue-800">Legend</th>
+                    <th className="px-6 py-4 text-center font-bold text-blue-800">Epic</th>
+                    <th className="px-6 py-4 text-center font-bold text-blue-800">UMKM/Supporting</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
                     ["Nama di depan event", "Ya", "—", "—", "—"],
-                    [
-                      "Logo backdrop/banner",
-                      "Terbesar",
-                      "Besar",
-                      "Sedang",
-                      "Slide/Story",
-                    ],
+                    ["Logo backdrop/banner", "Terbesar", "Besar", "Sedang", "Slide/Story"],
                     ["Overlay streaming", "Ya", "Ya", "Ya", "—"],
-                    [
-                      "Booth di venue",
-                      "Eksklusif",
-                      "Ya",
-                      "Opsional",
-                      "Meja kecil",
-                    ],
-                    [
-                      "MC & Caster mention",
-                      "Sepanjang acara",
-                      "Per babak",
-                      "Opening/Closing",
-                      "Sesi apresiasi",
-                    ],
-                    [
-                      "Hak sponsor hadiah",
-                      "Utama",
-                      "Tambahan",
-                      "Merchandise",
-                      "Hiburan",
-                    ],
+                    ["Booth di venue", "Eksklusif", "Ya", "Opsional", "Meja kecil"],
+                    ["MC & Caster mention", "Sepanjang acara", "Per babak", "Opening/Closing", "Sesi apresiasi"],
+                    ["Hak sponsor hadiah", "Utama", "Tambahan", "Merchandise", "Hiburan"],
                   ].map((row, i) => (
-                    <tr key={i} className="border-t border-gray-200">
-                      <td className="px-4 py-3 font-medium text-gray-700">{row[0]}</td>
+                    <tr key={i} className="border-t border-gray-200 hover:bg-gray-100 transition-colors">
+                      <td className="px-6 py-4 font-semibold text-gray-700">{row[0]}</td>
                       {row.slice(1).map((cell, j) => (
-                        <td key={j} className="px-4 py-3 text-center text-gray-600">
+                        <td
+                          key={j}
+                          className="px-6 py-4 text-center text-gray-600"
+                        >
                           {cell === "Ya" ? (
-                            <span className="text-[#9F2798] font-semibold">
-                              Ya
-                            </span>
+                            <span className="text-purple-800 font-bold">Ya</span>
                           ) : (
                             cell
                           )}
@@ -524,74 +419,100 @@ const JMLCEventDetailPage: React.FC = () => {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* PRIZE INTEGRATION */}
-        <section className="py-12">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Contoh Integrasi Hadiah Sponsor
             </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5]">Juara 1</h4>
-                <p className="text-sm text-gray-700">
-                  Rp 6.000.000 + Voucher Hotel 2 Malam —{" "}
-                  <i>by Hotel Partner</i>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 1</h4>
+                <p className="text-sm text-gray-700 mt-1">
+                  Rp 8.000.000 + Voucher Hotel 2 Malam — <i>by Hotel Partner</i>
                 </p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5]">Juara 2</h4>
-                <p className="text-sm text-gray-700">
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 2</h4>
+                <p className="text-sm text-gray-700 mt-1">
                   Rp 4.000.000 + Voucher Restoran Rp 1.000.000 —{" "}
                   <i>by Café Sponsor</i>
                 </p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5]">Juara 3</h4>
-                <p className="text-sm text-gray-700">
-                  Rp 2.500.000 + Merchandise Eksklusif —{" "}
-                  <i>by Brand Lokal</i>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 3</h4>
+                <p className="text-sm text-gray-700 mt-1">
+                  Rp 3.000.000 + Merchandise Eksklusif — <i>by Brand Lokal</i>
                 </p>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-6">
-                <h4 className="font-semibold text-[#3B46A5]">MVP</h4>
-                <p className="text-sm text-gray-700">
-                  Rp 500.000 + 1 Malam Villa —{" "}
-                  <i>by Villa Partner</i>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 4</h4>
+                <p className="text-sm text-gray-700 mt-1">
+                  Rp 2.000.000 + 1 Malam Villa — <i>by Villa Partner</i>
                 </p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 5-8</h4>
+                <p className="text-sm text-gray-700 mt-1">
+                  Rp 500.000 + Product — <i>by UMKM</i>
+                </p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                <h4 className="font-bold text-blue-800">Juara 9-16</h4>
+                <p className="text-sm text-gray-700 mt-1">
+                  Rp 250.000 + Product — <i>by UMKM</i>
+                </p>
+              </div>
+              <div className="lg:col-start-2"> {/* Ini yang baru untuk memposisikan di tengah */}
+                <div className="bg-gray-50 rounded-xl p-6 shadow-md border border-gray-200">
+                  <h4 className="font-bold text-blue-800">MVP</h4>
+                  <p className="text-sm text-gray-700 mt-1">
+                    Rp 1.000.000 + Product — <i>by UMKM</i>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* --- */}
+
         {/* DELIVERABLES & TIMELINE */}
-        <section id="deliverables" className="py-12 md:py-16">
-          <div className="container grid md:grid-cols-2 gap-10">
+        <section id="deliverables" className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
+              <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat mb-4 text-purple-800">
                 Sponsor Deliverables
               </h2>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li>• Logo di materi (backdrop, banner, overlay, konten media sosial)</li>
-                <li>• Booth/aktivasi di venue (Diamond/Gold)</li>
-                <li>• MC & caster shout-out sesuai paket</li>
-                <li>• Integrasi hadiah (voucher/produk) saat awarding</li>
-                <li>• Dokumentasi foto & video recap berlogo sponsor</li>
+              <ul className="text-base text-gray-700 space-y-3 list-disc pl-5">
+                <li>
+                  Logo di materi (backdrop, banner, overlay, konten media
+                  sosial)
+                </li>
+                <li>Booth/aktivasi di venue (Diamond/Gold)</li>
+                <li>MC & caster shout-out sesuai paket</li>
+                <li>Integrasi hadiah (voucher/produk) saat awarding</li>
+                <li>Dokumentasi foto & video recap berlogo sponsor</li>
               </ul>
-              <h3 className="mt-6 font-semibold text-[#3B46A5]">
+              <h3 className="mt-8 font-bold text-xl text-blue-800">
                 Kebutuhan Materi dari Sponsor
               </h3>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li>• Logo vektor (.AI/.EPS/.SVG) & PNG transparan</li>
-                <li>• Brand guideline (warna, clear space, larangan penggunaan)</li>
-                <li>• Copy pendek untuk MC (maks 30–45 detik)</li>
-                <li>• Detail hadiah/booth (jika ada)</li>
+              <ul className="text-base text-gray-700 space-y-3 list-disc pl-5 mt-2">
+                <li>Logo vektor (.AI/.EPS/.SVG) & PNG transparan</li>
+                <li>
+                  Brand guideline (warna, clear space, larangan penggunaan)
+                </li>
+                <li>Copy pendek untuk MC (maks 30–45 detik)</li>
+                <li>Detail hadiah/booth (jika ada)</li>
               </ul>
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
+              <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat mb-4 text-purple-800">
                 Timeline Sponsor
               </h2>
-              <ol className="text-sm text-gray-700 space-y-3">
+              <ol className="text-base text-gray-700 space-y-4 list-decimal pl-5">
                 <li>
                   <b>H-60 — H-45</b>: Konfirmasi paket & penandatanganan MoU
                 </li>
@@ -599,8 +520,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   <b>H-45 — H-30</b>: Kirim logo & brand guideline
                 </li>
                 <li>
-                  <b>H-30 — H-21</b>: Produksi materi (backdrop, overlay,
-                  konten)
+                  <b>H-30 — H-21</b>: Produksi materi (backdrop, overlay, konten)
                 </li>
                 <li>
                   <b>H-21 — H-7</b>: Promo publik, sosial media blast
@@ -619,32 +539,34 @@ const JMLCEventDetailPage: React.FC = () => {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* ORGANIZER */}
-        <section className="py-12">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               Organizer — Tiga Main Organizer Setara
             </h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
-                <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#9F2798] to-[#3B46A5] mb-3"></div>
-                <div className="font-semibold text-gray-800">JEOS</div>
-                <div className="text-xs text-gray-600">Main Organizer</div>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-md">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#9F2798] to-[#3B46A5] mb-3"></div>
+                <div className="font-semibold text-lg text-gray-800">JEOS</div>
+                <div className="text-sm text-gray-600">Main Organizer</div>
               </div>
-              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
-                <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#F4C01E] to-[#3B46A5] mb-3"></div>
-                <div className="font-semibold text-gray-800">Nempo Garut</div>
-                <div className="text-xs text-gray-600">Main Organizer</div>
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-md">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#F4C01E] to-[#3B46A5] mb-3"></div>
+                <div className="font-semibold text-lg text-gray-800">Nempo Garut</div>
+                <div className="text-sm text-gray-600">Main Organizer</div>
               </div>
-              <div className="bg-[#3B46A5]/10 border border-[#3B46A5]/20 rounded-xl p-6 text-center">
-                <div className="mx-auto w-14 h-14 rounded bg-gradient-to-br from-[#9F2798] to-[#F4C01E] mb-3"></div>
-                <div className="font-semibold text-gray-800">Garut Event</div>
-                <div className="text-xs text-gray-600">Main Organizer</div>
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-md">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#9F2798] to-[#F4C01E] mb-3"></div>
+                <div className="font-semibold text-lg text-gray-800">Garut Event</div>
+                <div className="text-sm text-gray-600">Main Organizer</div>
               </div>
             </div>
-            <div className="mt-6 grid md:grid-cols-3 gap-4 text-sm">
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
+            <div className="mt-10 grid md:grid-cols-3 gap-6 text-base">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-blue-800 mb-2">
                   Produksi & Operasional
                 </h4>
                 <ul className="text-gray-700 space-y-1">
@@ -653,8 +575,8 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>• Tim teknis (sound, network, stream)</li>
                 </ul>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-blue-800 mb-2">
                   Kompetisi & Talents
                 </h4>
                 <ul className="text-gray-700 space-y-1">
@@ -662,8 +584,8 @@ const JMLCEventDetailPage: React.FC = () => {
                   <li>• Caster, MC, juri, marshal</li>
                 </ul>
               </div>
-              <div className="bg-white/50 border border-gray-300/60 rounded-xl p-4">
-                <h4 className="font-semibold text-[#3B46A5] mb-2">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-blue-800 mb-2">
                   Branding & Partnership
                 </h4>
                 <ul className="text-gray-700 space-y-1">
@@ -676,20 +598,22 @@ const JMLCEventDetailPage: React.FC = () => {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* FAQ */}
-        <section id="faq" className="py-12 md:py-16 bg-[#F4C01E]/10">
-          <div className="container">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#9F2798]">
+        <section id="faq" className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat text-center mb-10 text-purple-800">
               FAQ Sponsor
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {faqData.map((item, i) => (
                 <div
                   key={i}
-                  className="bg-white/50 border border-gray-300/60 rounded-xl overflow-hidden"
+                  className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden"
                 >
                   <div
-                    className="cursor-pointer font-semibold text-gray-800 p-4 flex justify-between items-center"
+                    className="cursor-pointer font-semibold text-lg text-gray-800 p-6 flex justify-between items-center"
                     onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
                   >
                     <h4>{item.q}</h4>
@@ -699,7 +623,7 @@ const JMLCEventDetailPage: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={2}
                       stroke="currentColor"
-                      className="w-5 h-5 text-[#3B46A5] transform transition-transform duration-300"
+                      className="w-6 h-6 text-blue-800 transform transition-transform duration-300"
                       animate={{ rotate: openFAQ === i ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -718,7 +642,7 @@ const JMLCEventDetailPage: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                      <p className="mt-2 text-sm text-gray-700 p-4 border-t border-gray-200">
+                      <p className="mt-2 text-base text-gray-700 p-6 border-t border-gray-200">
                         {item.a}
                       </p>
                     </motion.div>
@@ -729,33 +653,34 @@ const JMLCEventDetailPage: React.FC = () => {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* CONTACT */}
-        <section id="contact" className="py-12 md:py-16">
-          <div className="container grid md:grid-cols-2 gap-10 items-center">
+        <section id="contact" className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-[#9F2798]">
+              <h2 className="text-3xl md:text-4xl font-extrabold font-montserrat mb-4 text-purple-800">
                 Bergabung sebagai Sponsor
               </h2>
-              <p className="text-gray-700">
-                Pilih paket yang sesuai, kirim logo & guideline, dan aktifkan
-                brand Anda di JMLC Vol. 2.
+              <p className="text-lg text-gray-700">
+                Pilih paket yang sesuai, kirim logo & guideline, dan aktifkan brand Anda di JMLC Vol. 2.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <motion.a
                   variants={buttonVariants}
                   whileTap="tap"
                   href="/Proposal_JMLC_Vol2.pdf"
-                  className="px-4 py-2 text-sm rounded-lg bg-[#9F2798] text-white font-semibold transition hover:opacity-80"
+                  className="px-6 py-3 text-lg rounded-full bg-purple-800 text-white font-bold shadow-lg hover:bg-purple-900 transition-colors"
                 >
                   Unduh Proposal PDF
                 </motion.a>
                 <motion.a
                   variants={buttonVariants}
                   whileTap="tap"
-                  href="https://wa.me/6281234567890  "
+                  href="https://wa.me/6281234567890"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 text-sm rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
+                  className="px-6 py-3 text-lg rounded-full border-2 border-blue-800 text-blue-800 font-semibold transition-colors hover:bg-blue-800 hover:text-white"
                 >
                   WhatsApp Panitia
                 </motion.a>
@@ -763,7 +688,7 @@ const JMLCEventDetailPage: React.FC = () => {
                   variants={buttonVariants}
                   whileTap="tap"
                   href="mailto:sponsor@jmlc.id?subject=JMLC%20Vol.2%20Sponsorship"
-                  className="px-4 py-2 text-sm rounded-lg border border-[#3B46A5] text-gray-800 transition hover:bg-gray-100"
+                  className="px-6 py-3 text-lg rounded-full border-2 border-blue-800 text-blue-800 font-semibold transition-colors hover:bg-blue-800 hover:text-white"
                 >
                   Email Kami
                 </motion.a>
@@ -771,16 +696,17 @@ const JMLCEventDetailPage: React.FC = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="bg-white/50 border border-gray-300/60 rounded-2xl p-6 grid gap-3 text-sm"
+              className="bg-gray-100 p-8 rounded-3xl shadow-xl grid gap-4"
             >
-              <div className="grid md:grid-cols-2 gap-3">
+              <h3 className="text-xl md:text-2xl font-bold text-blue-800 mb-2">Formulir Minat Sponsor</h3>
+              <div className="grid md:grid-cols-2 gap-4">
                 <input
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleInputChange}
                   required
                   placeholder="Nama Perusahaan"
-                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                   name="contactPerson"
@@ -788,12 +714,30 @@ const JMLCEventDetailPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   placeholder="PIC / Kontak"
-                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Email"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  name="whatsapp"
+                  type="tel"
+                  value={formData.whatsapp}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="WhatsApp (ex: 62812...)"
+                  className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="relative">
                 <div
-                  className={`block w-full px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800 cursor-pointer flex justify-between items-center transition-colors duration-200 ${isDropdownOpen ? 'rounded-b-none' : ''}`}
+                  className={`block w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 cursor-pointer flex justify-between items-center transition-colors duration-200 ${isDropdownOpen ? "rounded-b-none" : ""}`}
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
                   <span>{formData.packageType || "Pilihan Paket"}</span>
@@ -805,13 +749,17 @@ const JMLCEventDetailPage: React.FC = () => {
                     animate={{ rotate: isDropdownOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </motion.svg>
                 </div>
                 <AnimatePresence>
                   {isDropdownOpen && (
                     <motion.div
-                      className="absolute z-10 w-full bg-white/50 border border-gray-300/60 rounded-b-lg overflow-hidden mt-0.5"
+                      className="absolute z-10 w-full bg-white border border-gray-300 rounded-b-lg overflow-hidden mt-0.5 shadow-lg"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -825,7 +773,11 @@ const JMLCEventDetailPage: React.FC = () => {
                               handlePackageSelect(option.value);
                             }
                           }}
-                          className={`px-4 py-2 cursor-pointer transition-colors ${formData.packageType === option.value ? 'bg-[#F4C01E]/30 font-semibold' : 'hover:bg-gray-200'}`}
+                          className={`px-4 py-3 cursor-pointer transition-colors ${
+                            formData.packageType === option.value
+                              ? "bg-purple-100 font-semibold"
+                              : "hover:bg-gray-100"
+                          }`}
                         >
                           {option.label}
                         </div>
@@ -840,26 +792,27 @@ const JMLCEventDetailPage: React.FC = () => {
                 onChange={handleInputChange}
                 rows={4}
                 placeholder="Catatan / kebutuhan aktivasi"
-                className="px-4 py-3 rounded-lg border border-gray-300 bg-white/50 text-gray-800"
+                className="px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
               <motion.button
                 variants={buttonVariants}
                 whileTap="tap"
                 type="submit"
-                className="mt-2 px-4 py-2 text-sm rounded-lg font-semibold bg-[#9F2798] text-white transition hover:opacity-80"
+                className="mt-4 px-6 py-3 text-lg rounded-full font-bold bg-purple-800 text-white shadow-lg hover:bg-purple-900 transition-colors"
               >
                 Kirim Minat
               </motion.button>
-              <p className="text-[10px] text-gray-500">
-                *Form ini contoh tampilan. Integrasikan ke backend/Google Form
-                sesuai kebutuhan.
+              <p className="text-xs text-gray-500 mt-2">
+                *Form ini contoh tampilan. Integrasikan ke backend/Google Form sesuai kebutuhan.
               </p>
             </form>
           </div>
         </section>
 
+        {/* --- */}
+
         {/* FOOTER */}
-        <footer className="border-t border-gray-200 py-8 text-center text-xs text-gray-500">
+        <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
           © JMLC Vol. 2 — JEOS · Nempo Garut · Garut Event
         </footer>
       </motion.div>
